@@ -6,6 +6,7 @@ ga_code: UA-22730035-2
 
 exclude:
   - node_modules
-  - package**.json
+  - package.json
+  - package-lock.json
   - README.md
   - gulpfile.js
