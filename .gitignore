@@ -1,3 +1,7 @@
+# Jekyll ignores
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+
+# Node ignores
+node_modules
