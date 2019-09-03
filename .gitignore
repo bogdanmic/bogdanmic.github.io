@@ -2,6 +2,8 @@
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+# This is the assets/vendor folder and we don't want to commit this except in _site
+assets/vendor/**
 
 # Node ignores
 node_modules
