@@ -6,7 +6,7 @@
 		"_sass/main.scss"
 	],
 	"sourcesContent": [
-		"@import \"main\";\n",
+		"@import \"main\";\r\n",
 		"$backgroundColor: #ffffff;\r\n$bodyColor: #000000;\r\n$bodyFont: -apple-system,BlinkMacSystemFont,\"Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\";\r\n\r\nbody {\r\n  background: $backgroundColor;\r\n  color: $bodyColor;\r\n  font-family: $bodyFont;\r\n}\r\n"
 	],
 	"names": [],
