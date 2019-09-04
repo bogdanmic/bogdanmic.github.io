@@ -19,7 +19,7 @@ deploy:
   verbose: true
   github-token: $GITHUB_TOKEN
   target_branch: release
-  repo: 
+  repo: bogdanmic/bogdanmic.github.io
   on:
     branch: master
 
