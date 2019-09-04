@@ -4,8 +4,9 @@ rvm:
 
 before_install:
   - npm install
+  # - gem install
 
-install: gem install jekyll html-proofer
+# install: gem install jekyll html-proofer
 
 script: npm run build
 
