@@ -9,3 +9,5 @@ $ npm run serve
 # To build the website for production
 $ npm run build
 ```
+
+To deploy the pages I use [Travis CI](https://travis-ci.com).
