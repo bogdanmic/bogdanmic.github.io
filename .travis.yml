@@ -2,4 +2,10 @@ language: ruby
 rvm:
   - 2.6.3
 
+before_install:
+  - npm install
+  # install: gem install jekyll html-proofer
+
+script: npm run build
+
 cache: bundler # caching bundler gem packages will speed up build
