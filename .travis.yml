@@ -5,7 +5,7 @@ rvm:
 
 before_install:
   - npm install
-  - bundle install
+  # - bundle install
 
 script: npm run build
 
