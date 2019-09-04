@@ -6,8 +6,23 @@ before_install:
   - npm install
   - bundle install
 
-# install: gem install jekyll html-proofer
-
 script: npm run build
+deploy:
+  provider: pages
+  local-dir: ./_site
+  target-branch: master
+  email: deploy@travis-ci.org
+  name: Deployment Bot
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: gh-pages
 
+env:
+  global:
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 cache: bundler # caching bundler gem packages will speed up build
+branches:
+  only:
+  - master
