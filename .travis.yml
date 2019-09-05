@@ -6,38 +6,34 @@ rvm:
 cache: bundler # caching bundler gem packages will speed up build
 sudo: false # route your build to the container-based infrastructure for a faster build
 
+# installs the dependencies in the Gemfile and makes sure we have everything we need (e.g. jekyll)
+before_install:
+  - gem update --system
+  - gem install bundler
+  - bundle install 
+
+# Install npm  dependencies that we need in our project and for our build script
+before_script:
+  - npm install
+script: 
+  - npm run build
+
+deploy:
+  provider: pages
+  local-dir: ./_site
+  email: deploy@travis-ci.org
+  name: Deployment Bot
+  skip-cleanup: true
+  keep-history: true
+  verbose: true
+  github-token: $GITHUB_TOKEN
+  target_branch: master
+  on:
+    branch: develop
+
 env:
   global:
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 branches:
   only:
-    - develop
-
-jobs:
-  include:
-    # installs the dependencies in the Gemfile and makes sure we have everything we need (e.g. jekyll)
-    - stage: prepare jekyll
-      install:
-        - gem update --system
-        - gem install bundler
-        - bundle install
-    - stage: build app
-      # Install npm  dependencies that we need in our project and for our build script
-      install:
-        - npm install
-      script:
-        - npm run build
-    - stage: deploy
-      script: skip
-      deploy:
-        provider: pages
-        local-dir: ./_site
-        email: deploy@travis-ci.org
-        name: Deployment Bot
-        skip-cleanup: true
-        keep-history: true
-        verbose: true
-        github-token: $GITHUB_TOKEN
-        target_branch: master
-        on:
-          branch: develop
+  - develop
