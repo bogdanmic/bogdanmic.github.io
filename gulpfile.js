@@ -4,28 +4,40 @@ const gulp = require('gulp');
 const exec = require('child_process').exec;
 
 /**
- * The build task. Use this to build the project.
+ * The available gulp tasks
  */
 gulp.task('serve', gulp.series(vendor, serveJekyll));
 
-gulp.task('build', gulp.series(vendor, buildJekyll));
+gulp.task('build', gulp.series(vendor, buildJekyll, htmlProofer));
 
-function buildJekyll(cb) {
-    exec('JEKYLL_ENV=production jekyll build', function (err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
-}
-
+/**
+ * Starts the local development server
+ * @param {any} cb 
+ */
 function serveJekyll(cb) {
-    exec('jekyll serve', function (err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
-}
+    execute('jekyll serve', cb);
+};
 
+/**
+ * Builds the static files for the project
+ * @param {any} cb 
+ */
+function buildJekyll(cb) {
+    execute('JEKYLL_ENV=production jekyll build', cb());
+};
+
+/**
+ * Checks the resulting site built to ensure all links and images exist
+ * @param {any} cb 
+ */
+function htmlProofer(cb) {
+    execute('htmlproofer ./_site', cb);
+};
+
+/**
+ * Copies all vendor dependencies in the /assets/vendor folder to be available for the build
+ * @param {any} cb 
+ */
 function vendor(cb) {
     return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
@@ -34,4 +46,17 @@ function vendor(cb) {
 
     ])
         .pipe(gulp.dest('./assets/vendor'));
+};
+
+/**
+ * Executes an arbitrary command
+ * @param {string} command 
+ * @param {any} cb 
+ */
+function execute(command, cb) {
+    exec(command, function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
 };
