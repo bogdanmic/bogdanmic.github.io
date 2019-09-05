@@ -7,9 +7,13 @@ const bootlint = require('gulp-bootlint');
 /**
  * The available gulp tasks
  */
-gulp.task('serve', gulp.series(cleanJekyll, vendor, serveJekyll));
+const vendor = gulp.parallel(vendorJs, vendorFonts);
+const validate = gulp.parallel(htmlProoferJekyll, bootLintSite);
+const prepare = gulp.series(cleanJekyll, vendor);
 
-gulp.task('build', gulp.series(vendor, buildJekyll, htmlProoferJekyll, bootlintSite));
+gulp.task('serve', gulp.series(prepare, serveJekyll));
+
+gulp.task('build', gulp.series(prepare, buildJekyll, validate));
 
 /**
  * Cleans the local jekyll folders
@@ -44,30 +48,41 @@ function htmlProoferJekyll(cb) {
 };
 
 /**
- * Copies all vendor dependencies in the /assets/vendor folder to be available for the build
+ * Copies all js vendor dependencies in the /assets/js folder to be available for the build
  * @param {any} cb 
  */
-function vendor(cb) {
+function vendorJs(cb) {
     return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js'
 
     ])
-        .pipe(gulp.dest('./assets/vendor'));
+        .pipe(gulp.dest('./assets/vendor/js'));
+};
+
+/**
+ * Copies all fonts vendor dependencies in the /assets/fonts folder to be available for the build
+ * @param {any} cb 
+ */
+function vendorFonts(cb) {
+    return gulp.src([
+        'node_modules/@fortawesome/fontawesome-free/webfonts/**.*'
+    ])
+        .pipe(gulp.dest('./assets/vendor/fonts'));
 };
 
 /**
  * Checks for several common HTML mistakes in webpages that are using Bootstrap in a fairly "vanilla" way
  * @param {any} cb 
  */
-function bootlintSite(cb) {
+function bootLintSite(cb) {
     return gulp.src('_site/**/*.html')
         .pipe(bootlint({
             stoponerror: true,
             // bootlint options
         }));
-}; 
+};
 
 /**
  * Executes an arbitrary command
