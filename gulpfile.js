@@ -6,9 +6,17 @@ const exec = require('child_process').exec;
 /**
  * The available gulp tasks
  */
-gulp.task('serve', gulp.series(vendor, serveJekyll));
+gulp.task('serve', gulp.series(cleanJekyll, vendor, serveJekyll));
 
-gulp.task('build', gulp.series(vendor, buildJekyll, htmlProofer));
+gulp.task('build', gulp.series(vendor, buildJekyll, htmlProoferJekyll));
+
+/**
+ * Cleans the local jekyll folders
+ * @param {any} cb 
+ */
+function cleanJekyll(cb) {
+    execute('jekyll clean', cb);
+};
 
 /**
  * Starts the local development server
@@ -23,14 +31,14 @@ function serveJekyll(cb) {
  * @param {any} cb 
  */
 function buildJekyll(cb) {
-    execute('JEKYLL_ENV=production jekyll build', cb());
+    execute('JEKYLL_ENV=production jekyll build', cb);
 };
 
 /**
  * Checks the resulting site built to ensure all links and images exist
  * @param {any} cb 
  */
-function htmlProofer(cb) {
+function htmlProoferJekyll(cb) {
     execute('htmlproofer ./_site', cb);
 };
 
