@@ -2,13 +2,14 @@
 
 const gulp = require('gulp');
 const exec = require('child_process').exec;
+const bootlint = require('gulp-bootlint');
 
 /**
  * The available gulp tasks
  */
 gulp.task('serve', gulp.series(cleanJekyll, vendor, serveJekyll));
 
-gulp.task('build', gulp.series(vendor, buildJekyll, htmlProoferJekyll));
+gulp.task('build', gulp.series(vendor, buildJekyll, htmlProoferJekyll, bootlintSite));
 
 /**
  * Cleans the local jekyll folders
@@ -55,6 +56,18 @@ function vendor(cb) {
     ])
         .pipe(gulp.dest('./assets/vendor'));
 };
+
+/**
+ * Checks for several common HTML mistakes in webpages that are using Bootstrap in a fairly "vanilla" way
+ * @param {any} cb 
+ */
+function bootlintSite(cb) {
+    return gulp.src('_site/**/*.html')
+        .pipe(bootlint({
+            stoponerror: true,
+            // bootlint options
+        }));
+}; 
 
 /**
  * Executes an arbitrary command

@@ -18,6 +18,7 @@ before_script:
 script: 
   - npm run build
 
+# Setup according to https://docs.travis-ci.com/user/deployment/pages/ 
 deploy:
   provider: pages
   local-dir: ./_site
@@ -37,3 +38,6 @@ env:
 branches:
   only:
   - develop
+# Optional: disable email notifications about the outcome of your builds
+# notifications:
+  # email: false
