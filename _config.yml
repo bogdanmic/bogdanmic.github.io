@@ -4,6 +4,9 @@ title: "" # the name of your site, e.g. ACME Corp.
 # Google Analytics code
 ga_code: UA-22730035-2
 
+plugins:
+  - jekyll-seo-tag
+
 exclude:
   - node_modules
   - package.json
