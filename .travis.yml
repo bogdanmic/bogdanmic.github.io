@@ -13,19 +13,18 @@ branches:
   only:
     - develop
 
-# installs the dependencies in the Gemfile and makes sure we have everything we need (e.g. jekyll)
-before_install:
-  - gem update --system
-  - gem install bundler
-  - bundle install
-
 jobs:
   include:
-    # Install npm  dependencies that we need in our project and for our build script
-    - stage: install dependencies
-      script:
-        - npm install
+    # installs the dependencies in the Gemfile and makes sure we have everything we need (e.g. jekyll)
+    - stage: prepare jekyll
+      install:
+        - gem update --system
+        - gem install bundler
+        - bundle install
     - stage: build app
+      # Install npm  dependencies that we need in our project and for our build script
+      install:
+        - npm install
       script:
         - npm run build
     - stage: deploy
