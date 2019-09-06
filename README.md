@@ -11,3 +11,5 @@ $ npm run build
 ```
 
 To deploy the pages I use [Travis CI](https://travis-ci.com).
+
+Use [compress](http://jch.penibelst.de/) to compress html in Jekyll.

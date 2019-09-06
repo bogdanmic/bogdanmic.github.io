@@ -11,6 +11,14 @@ sass:
     - _sass
     - node_modules
 
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  ignore:
+    envs: [local]
+  startings: [html, head, body]
+
 plugins:
   - jekyll-seo-tag
 
