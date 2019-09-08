@@ -20,6 +20,8 @@ compress_html:
   startings: [html, head, body]
 
 plugins:
+  - jekyll-feed
+  - jekyll-sitemap
   - jekyll-seo-tag
 
 exclude:
