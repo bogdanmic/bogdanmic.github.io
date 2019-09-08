@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Happy Jekylling!"
-description: "Happy Jekylling!"
+title: "Work in progress!"
+description: "Work in progress!"
 ---
 
-## You're ready to go!
+## Ready to go!
 
-Start developing your Jekyll website!
+Work in progress!
