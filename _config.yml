@@ -28,3 +28,7 @@ exclude:
   - package-lock.json
   - README.md
   - gulpfile.js
+
+# Custom variables:
+github_handle: bogdanmic
+twitter_handle: micbogdan
