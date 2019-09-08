@@ -8,8 +8,11 @@
 
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
+                <li class="nav-item {% if page.name =='index.md' %}active{%endif%}">
                     <a class="nav-link" href="{{ site.url }}">Home</a>
+                </li>
+                <li class="nav-item {% if page.name =='about.md' %}active{%endif%}">
+                    <a class="nav-link" href="{% link about.md %}">About</a>
                 </li>
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
