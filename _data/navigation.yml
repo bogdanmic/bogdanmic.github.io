@@ -1,0 +1,4 @@
+- name: Home
+  link: index.md
+- name: About
+  link: about.md
