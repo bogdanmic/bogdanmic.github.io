@@ -2,13 +2,12 @@
 
 const gulp = require('gulp');
 const exec = require('child_process').exec;
-const bootlint = require('gulp-bootlint');
 
 /**
  * The available gulp tasks
  */
 const vendor = gulp.parallel(vendorJs, vendorFonts);
-const validate = gulp.parallel(htmlProoferJekyll, bootLintSite);
+const validate = gulp.parallel(htmlProoferJekyll);
 const prepare = gulp.series(cleanJekyll, vendor);
 
 gulp.task('serve', gulp.series(prepare, serveJekyll));
@@ -70,18 +69,6 @@ function vendorFonts(cb) {
         'node_modules/@fortawesome/fontawesome-free/webfonts/**.*'
     ])
         .pipe(gulp.dest('./assets/vendor/fonts'));
-};
-
-/**
- * Checks for several common HTML mistakes in webpages that are using Bootstrap in a fairly "vanilla" way
- * @param {any} cb 
- */
-function bootLintSite(cb) {
-    return gulp.src('_site/**/*.html')
-        .pipe(bootlint({
-            stoponerror: true,
-            // bootlint options
-        }));
 };
 
 /**
