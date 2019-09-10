@@ -1,8 +1,7 @@
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
 title: "Software recipes" # the name of your site, e.g. ACME Corp.
-# Google Analytics code
-ga_code: UA-22730035-2
+excerpt_separator: <!--more-->
 
 sass:
   sass_dir: _sass
@@ -34,3 +33,4 @@ exclude:
 # Custom variables:
 github_handle: bogdanmic
 twitter_handle: micbogdan
+ga_code: UA-22730035-2 # Google Analytics code
